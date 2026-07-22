@@ -1,0 +1,12 @@
+neo4j
+google-generativeai
+langchain
+langchain-community
+langchain-core
+python-dotenv
+pandas
+python-dotenv
+streamlit
+ollama
+langgraph
+langgraph-core
