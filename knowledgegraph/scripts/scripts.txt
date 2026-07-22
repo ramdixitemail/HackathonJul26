@@ -1,3 +1,4 @@
+#command to import the data into neo4j
 docker exec -i neo4jnew cypher-shell -u neo4j -p test < import.cypher
 
 docker exec -i neo4jnew cypher-shell -u neo4j -p test12345 < import.cypher
