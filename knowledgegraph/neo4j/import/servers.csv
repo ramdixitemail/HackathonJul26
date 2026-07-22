@@ -1,0 +1,5 @@
+serverId,hostname,os,environment,ip
+SRV001,trade-prd-01,Linux,PROD,10.10.1.10
+SRV002,risk-prd-01,Linux,PROD,10.10.1.20
+SRV003,pay-prd-01,Windows,PROD,10.10.1.30
+SRV004,portal-uat-01,Linux,UAT,10.10.2.15

@@ -1,0 +1,5 @@
+vulnId,cve,severity,cvss,status
+VUL001,CVE-2025-1111,Critical,9.8,Open
+VUL002,CVE-2025-2222,High,8.7,Open
+VUL003,CVE-2025-3333,Medium,6.1,Closed
+VUL004,CVE-2025-4444,Critical,9.5,Open

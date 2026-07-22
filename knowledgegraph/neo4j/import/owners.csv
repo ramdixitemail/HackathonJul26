@@ -1,0 +1,4 @@
+ownerId,name,email,department
+OWN001,John Smith,john.smith@bank.com,Markets IT
+OWN002,Sarah Johnson,sarah.johnson@bank.com,Risk IT
+OWN003,David Lee,david.lee@bank.com,Infrastructure

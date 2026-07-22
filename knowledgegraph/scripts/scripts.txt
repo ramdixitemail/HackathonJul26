@@ -1,0 +1,9 @@
+docker exec -i neo4jnew cypher-shell -u neo4j -p test < import.cypher
+
+docker exec -i neo4jnew cypher-shell -u neo4j -p test12345 < import.cypher
+
+docker run --name neo4jnew -p7474:7474 -p7687:7687 -d -v d:/dbhackathon/knowledgegraph/neo4j/data:/data -v d:/dbhackathon/knowledgegraph/neo4j/logs:/logs -v d:/dbhackathon/knowledgegraph/neo4j/import:/var/lib/neo4j/import -v d:/dbhackathon/knowledgegraph/neo4j/plugins:/plugins --env NEO4J_AUTH=neo4j/test12345  neo4j:5.26
+
+MATCH (n)
+OPTIONAL MATCH (n)-[r]-(m)
+RETURN n,r,m;

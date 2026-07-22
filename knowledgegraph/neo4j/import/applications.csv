@@ -1,0 +1,5 @@
+appId,name,criticality,status,technology
+APP001,Trade Capture,High,Production,Java
+APP002,Risk Engine,Critical,Production,Python
+APP003,Payments Hub,High,Production,.NET
+APP004,Customer Portal,Medium,UAT,React

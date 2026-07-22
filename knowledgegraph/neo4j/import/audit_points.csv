@@ -1,0 +1,5 @@
+auditId,title,rating,status,recommendation
+AUD001,Weak Password Policy,High,Open,Implement MFA
+AUD002,Unsupported Operating System,Critical,Open,Upgrade OS
+AUD003,Database Backup Missing,High,Closed,Configure backups
+AUD004,Excessive Privileges,Medium,Open,Review IAM roles
