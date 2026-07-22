@@ -109,11 +109,6 @@ The application consists of the following major components:
 ```
 agents/
 │
-├── api/
-│   ├── app.py
-│   ├── routes.py
-│   └── config.py
-│
 ├── agents/
 │   ├── orchestrator.py
 │   ├── planner.py
@@ -122,49 +117,30 @@ agents/
 │   ├── sql_agent.py
 │   ├── policy_agent.py
 │   └── utils.py
-│
+├── assets/
+│   ├── logo.png
+
 ├── prompts/
 │   ├── system_prompt.txt
-│   ├── planner_prompt.txt
-│   └── agent_prompts/
 │
 ├── knowledgegraph/
 │   ├── neo4j/
 │   ├── import.cypher
-│   └── graph_loader.py
 │
-├── vectorstore/
-│   ├── embeddings.py
-│   ├── ingest.py
-│   └── retrieval.py
+├── llm/
+│   ├── ollama_client.py
 │
 ├── models/
 │   ├── llm.py
 │   └── embedding_model.py
 │
-├── tools/
-│   ├── graph_tools.py
-│   ├── search_tools.py
-│   └── utility_tools.py
-│
-├── ui/
-│   ├── static/
-│   ├── templates/
-│   └── app.py
-│
-├── data/
-│   ├── documents/
-│   ├── csv/
-│   └── sample_data/
-│
-├── logs/
-│
-├── tests/
+├── workflow/
+│   ├── graph_builder.py
+│   ├── nodes.py
+│   └── router.py
+│   └── state.py
 │
 ├── requirements.txt
-├── docker-compose.yml
-├── Dockerfile
-└── README.md
 ```
 
 ---
@@ -216,15 +192,8 @@ pip install -r requirements.txt
 Start the application.
 
 ```bash
-python app.py
+streamlit run app.py
 ```
-
-or, if using FastAPI:
-
-```bash
-uvicorn app:app --reload
-```
-
 ---
 
 ## Configuration
