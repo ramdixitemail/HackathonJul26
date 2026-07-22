@@ -87,7 +87,7 @@ The `import.cypher` file contains the graph schema and data required to initiali
 
 # Agentic AI Application
 
-The application implements a **multi-agent AI architecture** that combines Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Knowledge Graphs, and specialized AI agents to answer complex queries and generate audit evidence.
+The application implements a **multi-agent AI architecture** that combines Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Knowledge Graphs, and specialized AI agents to answer complex queries.
 
 The system is designed to be modular, allowing individual agents to collaborate while sharing context through a common orchestration layer.
 
@@ -110,133 +110,37 @@ The application consists of the following major components:
 ## Folder Structure
 
 ```
-HackathonJul26/
-├── agents/                          # Main Agentic AI application
-│   ├── agents/
-│   │   ├── orchestrator.py         # Coordinates multi-agent workflows
-│   │   ├── planner.py              # Plans which agents to invoke
-│   │   ├── graph_agent.py          # Neo4j Knowledge Graph queries
-│   │   ├── rag_agent.py            # Retrieval-Augmented Generation
-│   │   ├── sql_agent.py            # SQL database queries
-│   │   ├── policy_agent.py         # Policy & compliance agent
-│   │   └── utils.py                # Shared utilities
-│   │
-│   ├── api/                         # REST API endpoints
-│   │   ├── routes.py               # Flask/FastAPI route definitions
-│   │   └── handlers.py             # Request handlers
-│   │
-│   ├── llm/
-│   │   ├── ollama_client.py        # Ollama LLM client
-│   │   └── openai_client.py        # OpenAI API client
-│   │
-│   ├── models/
-│   │   ├── llm.py                  # LLM model configuration
-│   │   └── embedding_model.py      # Embedding model initialization
-│   │
-│   ├── workflow/
-│   │   ├── graph_builder.py        # LangGraph workflow builder
-│   │   ├── nodes.py                # Workflow node definitions
-│   │   ├── router.py               # Request routing logic
-│   │   └── state.py                # Workflow state management
-│   │
-│   ├── prompts/
-│   │   ├── system_prompt.txt       # System-level prompts
-│   │   ├── orchestrator_prompt.py  # Orchestrator prompts
-│   │   ├── agent_prompts.py        # Individual agent prompts
-│   │   └── few_shot_examples.py    # Few-shot examples
-│   │
-│   ├── knowledgegraph/
-│   │   ├── neo4j/                  # Neo4j Docker volumes
-│   │   ├── import.cypher           # Graph initialization script
-│   │   └── queries.py              # Reusable Cypher queries
-│   │
-│   ├── vectorstore/
-│   │   ├── embeddings.py           # Embedding generation
-│   │   ├── retrieval.py            # Document retrieval logic
-│   │   └── ingestion.py            # Document ingestion pipeline
-│   │
-│   ├── tools/
-│   │   ├── graph_tools.py          # Neo4j query tools
-│   │   ├── search_tools.py         # Search and retrieval tools
-│   │   ├── sql_tools.py            # Database query tools
-│   │   └── external_tools.py       # Third-party integrations
-│   │
-│   ├── assets/
-│   │   ├── logo.png                # Application logo
-│   │   └── styles.css              # UI styles
-│   │
-│   ├── ui/
-│   │   ├── app.py                  # Streamlit main app
-│   │   ├── pages/                  # Streamlit page modules
-│   │   └── components.py           # Reusable UI components
-│   │
-│   ├── data/
-│   │   ├── sample_documents/       # Sample data for RAG
-│   │   ├── sample_policies.csv     # Policy templates
-│   │   └── knowledge_base/         # Training data
-│   │
-│   ├── logs/
-│   │   └── app.log                 # Application logs
-│   │
-│   ├── tests/
-│   │   ├── test_agents.py          # Agent unit tests
-│   │   ├── test_orchestrator.py    # Orchestrator tests
-│   │   └── test_workflow.py        # Workflow integration tests
-│   │
-│   ├── config.py                   # Configuration management
-│   ├── requirements.txt            # Python dependencies
-│   ├── .env.example                # Environment variable template
-│   ├── docker-compose.yml          # Docker services definition
-│   ├── Dockerfile                  # Application container image
-│   ├── app.py                      # Main application entry point
-│   └── README.md                   # Agentic AI module README
-│
-└── evidencegen/                     # Audit Evidence Generator (complementary module)
-    ├── backend/
-    │   ├── app.py                  # Flask REST API
-    │   ├── templates_config.py     # Control templates
-    │   ├── storage.py              # Pack storage logic
-    │   ├── agents/                 # Evidence collection agents
-    │   │   ├── github_agent.py     # GitHub integration
-    │   │   ├── confluence_agent.py # Confluence integration
-    │   │   ├── jira_agent.py       # Jira integration
-    │   │   ├── approvals_agent.py  # CI/CD pipeline approvals
-    │   │   └── screenshots_agent.py # Screenshot capture
-    │   └── llm/
-    │       ├── llm_client.py       # LLM client
-    │       ├── mapping.py          # Evidence-to-requirement mapping
-    │       └── qa.py               # Q&A over evidence packs
-    │
-    ├── frontend/                   # Vanilla HTML/CSS/JS UI
-    ├── requirements.txt
-    ├── .env.example
-    └── run.sh                      # Startup script
+agentic_ai/
+├── agents/                          # Individual AI agents and utilities
+├── api/                             # REST API endpoints (if present)
+├── llm/                             # LLM client configuration
+├── workflow/                        # LangGraph workflow definitions
+├── prompts/                         # System and agent-specific prompts
+├── graph/                           # Neo4j knowledge graph utilities
+├── imports/                         # Import scripts and data
+├── assets/                          # Application assets (logo, styles)
+├── logs/                            # Application logs
+├── app.py                           # Main application entry point
+├── config.py                        # Configuration management
+├── requirements.txt                 # Python dependencies
+└── .env                             # Environment variables
 ```
 
 ---
 
 ## Module Descriptions
 
-### **agents/** — Core Agentic AI Application
-
-| Subfolder | Purpose |
-|-----------|---------|
-| **agents/** | Individual AI agents (Orchestrator, Planner, Graph Agent, RAG Agent, SQL Agent, Policy Agent) and shared utilities. |
-| **api/** | REST API layer exposing agentic services. |
+| Folder | Purpose |
+|--------|---------|
+| **agents/** | Individual AI agents and shared utilities for multi-agent orchestration. |
+| **api/** | REST API layer exposing agentic services (optional). |
 | **llm/** | LLM client configuration (Ollama, OpenAI). |
-| **models/** | LLM and embedding model initialization. |
-| **workflow/** | LangGraph workflow definitions, node routing, and state management. |
+| **workflow/** | LangGraph workflow definitions and node routing. |
 | **prompts/** | System and agent-specific prompts for LLM interactions. |
-| **knowledgegraph/** | Neo4j setup, Cypher scripts, and graph query utilities. |
-| **vectorstore/** | Document embedding, ingestion, and semantic retrieval. |
-| **tools/** | Specialized tools for graph queries, database searches, and external APIs. |
-| **ui/** | Streamlit web interface and UI components. |
-| **data/** | Sample documents, policies, and training datasets. |
-| **tests/** | Unit and integration tests. |
-
-### **evidencegen/** — Audit Evidence Generator
-
-A complementary module that generates audit evidence packs by collecting evidence from multiple sources (GitHub, Confluence, Jira, CI/CD pipelines) and mapping it against control requirements using an LLM or rule engine.
+| **graph/** | Neo4j utilities and Cypher query helpers. |
+| **imports/** | Import scripts and initialization data. |
+| **assets/** | Static assets for the UI (logo, styles, etc.). |
+| **logs/** | Application logs directory. |
 
 ---
 
@@ -244,18 +148,16 @@ A complementary module that generates audit evidence packs by collecting evidenc
 
 The following sequence illustrates how a user request is processed:
 
-1. User submits a question through the **Web UI** (Streamlit).
-2. The **API Layer** receives the request.
+1. User submits a question through the **Web UI** or **API**.
+2. The **Workflow Layer** receives the request.
 3. The **Agent Orchestrator** analyzes the query intent.
-4. The **Planner** determines which specialized agents should participate.
-5. Selected agents retrieve information from:
+4. Selected agents retrieve information from:
    - **Neo4j Knowledge Graph** – Entity relationships
    - **Vector Database (RAG)** – Semantic document search
-   - **SQL Databases** – Structured data queries
    - **External APIs** – Third-party integrations
-6. Retrieved context is combined and passed to the **LLM**.
-7. The **LLM** synthesizes a comprehensive response.
-8. The response is returned to the user.
+5. Retrieved context is combined and passed to the **LLM**.
+6. The **LLM** synthesizes a comprehensive response.
+7. The response is returned to the user.
 
 ---
 
@@ -264,7 +166,7 @@ The following sequence illustrates how a user request is processed:
 ### **Prerequisites**
 
 - Python 3.9+
-- Docker and Docker Compose
+- Docker (for Neo4j)
 - Git
 - Virtual environment manager (venv or conda)
 
@@ -277,13 +179,14 @@ cd HackathonJul26
 
 ### **Step 2: Set Up Environment Variables**
 
-Copy the example environment file and configure it:
+Navigate to the agentic_ai directory and configure your environment:
 
 ```bash
-cp agents/.env.example agents/.env
+cd agentic_ai
+cat .env
 ```
 
-Edit `agents/.env` with your configuration:
+Edit `agentic_ai/.env` with your configuration:
 
 ```text
 # LLM Configuration
@@ -308,14 +211,7 @@ LOG_LEVEL=INFO
 
 ### **Step 3: Start Neo4j and Supporting Services**
 
-Using Docker Compose:
-
-```bash
-cd agents
-docker-compose up -d neo4j
-```
-
-Or manually with Docker:
+Using Docker:
 
 ```bash
 docker run -d \
@@ -331,14 +227,14 @@ Wait for Neo4j to be ready (check `http://localhost:7474`).
 ### **Step 4: Import Knowledge Graph Data**
 
 ```bash
-cd agents
-docker exec -i neo4j cypher-shell -u neo4j -p <password> < knowledgegraph/import.cypher
+cd agentic_ai/imports
+docker exec -i neo4j cypher-shell -u neo4j -p <password> < import.cypher
 ```
 
 ### **Step 5: Create Python Virtual Environment**
 
 ```bash
-cd agents
+cd agentic_ai
 python -m venv venv
 
 # Activate virtual environment
@@ -357,36 +253,16 @@ pip install -r requirements.txt
 
 ### **Step 7: Run the Application**
 
-#### Option A: Using Streamlit UI (Recommended for Development)
-
 ```bash
-streamlit run ui/app.py
+python app.py
 ```
 
-The UI will be available at `http://localhost:8501`.
-
-#### Option B: Using FastAPI (For Production)
-
-```bash
-python -m uvicorn api.routes:app --host 0.0.0.0 --port 8000 --reload
-```
-
-The API will be available at `http://localhost:8000/docs` (Swagger UI).
-
-#### Option C: Using Docker Compose (All Services)
-
-```bash
-docker-compose up --build
-```
+The application will start and be accessible based on the configuration in your `.env` file.
 
 ### **Step 8: Verify Setup**
 
-1. **Streamlit UI:** Open `http://localhost:8501` and test with a sample query.
-2. **API Health Check:**
-   ```bash
-   curl http://localhost:8000/health
-   ```
-3. **Neo4j Browser:** Open `http://localhost:7474` and verify the knowledge graph is loaded.
+1. **Application:** Verify it's running on the configured port.
+2. **Neo4j Browser:** Open `http://localhost:7474` and verify the knowledge graph is loaded.
 
 ---
 
@@ -396,18 +272,16 @@ Application settings can be managed through:
 
 1. **Environment Variables** (`.env` file)
 2. **config.py** (Python configuration module)
-3. **Docker Compose** (service configuration)
 
-Key configuration options:
+Key configuration options in `.env`:
 
-```python
-# config.py
-DATABASE_TYPE = "neo4j"  # or "sql"
-LLM_PROVIDER = "openai"  # or "ollama"
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-LOG_LEVEL = "INFO"
-MAX_CONTEXT_LENGTH = 4096
-AGENT_TIMEOUT = 30  # seconds
+```text
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=<password>
+OPENAI_API_KEY=<api-key>
+USE_OLLAMA=false
+OLLAMA_HOST=http://localhost:11434
 ```
 
 ---
@@ -422,7 +296,6 @@ AGENT_TIMEOUT = 30  # seconds
 - ✅ Prompt Engineering & Few-shot Learning
 - ✅ Context Management
 - ✅ Tool Calling & Function Invocation
-- ✅ Enterprise Data Retrieval (SQL, APIs)
 
 ---
 
@@ -431,17 +304,12 @@ AGENT_TIMEOUT = 30  # seconds
 | Component | Technology |
 |----------|------------|
 | **Language** | Python 3.9+ |
-| **Web Framework** | Streamlit (UI) / FastAPI (API) |
 | **Agent Framework** | LangGraph / LangChain |
 | **Knowledge Graph** | Neo4j 5.x |
-| **Vector Store** | ChromaDB / FAISS |
 | **LLM** | OpenAI GPT / Ollama |
 | **Embeddings** | OpenAI / Sentence Transformers |
-| **Database** | Neo4j / PostgreSQL (optional) |
-| **Containerization** | Docker / Docker Compose |
-| **Package Management** | pip / Poetry |
-| **Testing** | pytest |
-| **Logging** | Python logging / ELK stack (optional) |
+| **Containerization** | Docker |
+| **Package Management** | pip |
 
 ---
 
@@ -451,30 +319,9 @@ AGENT_TIMEOUT = 30  # seconds
 - 🧠 **Knowledge Graph integration using Neo4j**
 - 📚 **Retrieval-Augmented Generation (RAG) for contextual answers**
 - 🔧 **Modular and extensible agent architecture**
-- 🚀 **Enterprise-ready REST API layer**
-- 🛠️ **Extensible tool framework for agent capabilities**
-- 💬 **Context-aware multi-turn conversations**
-- 📄 **Document ingestion and semantic search**
+- 🚀 **Enterprise-ready REST API layer (optional)**
+- 💬 **Context-aware interactions**
 - 🔌 **Pluggable LLM providers (OpenAI, Ollama, etc.)**
-- 🐳 **Docker-ready deployment with Compose**
-- ✅ **Comprehensive test coverage**
-- 📊 **Audit trail and logging**
-
----
-
-## Testing
-
-Run the test suite:
-
-```bash
-pytest tests/ -v
-```
-
-Run with coverage report:
-
-```bash
-pytest tests/ --cov=. --cov-report=html
-```
 
 ---
 
@@ -514,5 +361,4 @@ This project is part of the HackathonJul26 initiative.
 
 - **Neo4j Documentation:** https://neo4j.com/docs/
 - **LangChain Documentation:** https://python.langchain.com/
-- **Streamlit Documentation:** https://docs.streamlit.io/
 - **FastAPI Documentation:** https://fastapi.tiangolo.com/
