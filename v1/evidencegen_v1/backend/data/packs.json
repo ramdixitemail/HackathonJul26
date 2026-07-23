@@ -1,0 +1,200 @@
+{
+  "pack-04813b67": {
+    "id": "pack-04813b67",
+    "template_id": "custom-audit-intake",
+    "template_name": "Custom \u2014 Audit Intake (ramdixitemail/HackathonJul26)",
+    "source_audit_text": "Provide that code commits are done in main branch",
+    "collect_by": "change_id",
+    "change_id": "ramdixitemail/HackathonJul26",
+    "control_id": null,
+    "date_range": null,
+    "sources": [
+      "repo",
+      "docs",
+      "screenshots"
+    ],
+    "source_labels": [
+      "Code repo (Bitbucket / GitHub)",
+      "Document repository (Confluence)",
+      "Screenshots (portal)"
+    ],
+    "status": "collected",
+    "created_at": "2026-07-23T08:33:10Z",
+    "evidence": [
+      {
+        "id": "ev-6dc31742",
+        "source": "repo",
+        "source_label": "Code repo (Bitbucket / GitHub)",
+        "type": "commit",
+        "title": "Commit 7d21215 \u2014 Adding initial implementation",
+        "detail": "Author: Vivek Awasthi on 2026-07-22T11:46:23Z. No open PR or matching branch found for this change; showing raw commit history instead.",
+        "actor": "vivekawasthi2014-ai",
+        "url": "https://github.com/ramdixitemail/HackathonJul26/commit/7d21215e98026443d73f8c4e71c22ba7ef4e032d",
+        "timestamp": "2026-07-22T11:46:23Z",
+        "is_mock": false
+      },
+      {
+        "id": "ev-be9d9c7c",
+        "source": "repo",
+        "source_label": "Code repo (Bitbucket / GitHub)",
+        "type": "commit",
+        "title": "Commit daddeb3 \u2014 Initial commit",
+        "detail": "Author: ramdixitemail on 2026-07-21T18:35:44Z. No open PR or matching branch found for this change; showing raw commit history instead.",
+        "actor": "ramdixitemail",
+        "url": "https://github.com/ramdixitemail/HackathonJul26/commit/daddeb39aa5ac666d8f16d9d60e5447cada7dd33",
+        "timestamp": "2026-07-21T18:35:44Z",
+        "is_mock": false
+      },
+      {
+        "id": "ev-2e1f0cc6",
+        "source": "docs",
+        "source_label": "Document repository (Confluence)",
+        "type": "change_record",
+        "title": "Change Record \u2014 ramdixitemail/HackathonJul26",
+        "detail": "Confluence page documenting change rationale, rollback plan, and risk assessment sign-off.",
+        "actor": "change-management-bot",
+        "url": "https://example.atlassian.net/wiki/spaces/CHG/pages/000123",
+        "timestamp": "2026-07-23T05:13:10Z",
+        "is_mock": true
+      },
+      {
+        "id": "ev-4207b129",
+        "source": "screenshots",
+        "source_label": "Screenshots (portal)",
+        "type": "screenshot",
+        "title": "Approval screen capture \u2014 ramdixitemail/HackathonJul26",
+        "detail": "Portal-captured screenshot of the approval workflow at time of sign-off.",
+        "actor": "audit-portal",
+        "url": "https://portal.example.com/evidence/screenshots/approval-482.png",
+        "timestamp": "2026-07-23T06:13:10Z",
+        "is_mock": true
+      }
+    ],
+    "agent_log": [
+      {
+        "source": "repo",
+        "status": "ok",
+        "detail": "2 item(s) collected (live)"
+      },
+      {
+        "source": "docs",
+        "status": "ok",
+        "detail": "1 item(s) collected (mock)"
+      },
+      {
+        "source": "screenshots",
+        "status": "ok",
+        "detail": "1 item(s) collected (mock)"
+      }
+    ],
+    "mapping_results": [
+      {
+        "requirement_id": "custom-req-1",
+        "status": "satisfied",
+        "rationale": "All commits are made to the main branch.",
+        "evidence_ids": [
+          "ev-6dc31742",
+          "ev-be9d9c7c"
+        ],
+        "requirement_text": "Verify that all code commits are made to the main branch."
+      },
+      {
+        "requirement_id": "custom-req-2",
+        "status": "satisfied",
+        "rationale": "No commits were made to other branches.",
+        "evidence_ids": [
+          "ev-6dc31742",
+          "ev-be9d9c7c"
+        ],
+        "requirement_text": "Check the commit history to ensure that no commits were made to other branches."
+      },
+      {
+        "requirement_id": "custom-req-3",
+        "status": "missing",
+        "rationale": "No evidence of commits made to other branches or their approval status.",
+        "evidence_ids": [],
+        "requirement_text": "Identify any commits made to other branches and verify that they were properly approved."
+      }
+    ],
+    "mapping_engine": "llm:groq",
+    "summary": "This evidence pack is partially ready for review, as it contains two requirements that have been satisfied and no requirements that are only partially met. However, one requirement remains unsatisfied, indicating that additional evidence is required to complete the assessment. Further review is necessary to determine the extent of the missing evidence.",
+    "summary_engine": "llm:groq"
+  },
+  "pack-fe093257": {
+    "id": "pack-fe093257",
+    "template_id": "change-mgmt-sod-4eyes-tests",
+    "template_name": "Change Management \u2014 SoD + 4-eyes + tests",
+    "source_audit_text": null,
+    "collect_by": "change_id",
+    "change_id": "main",
+    "control_id": null,
+    "date_range": null,
+    "sources": [
+      "repo"
+    ],
+    "source_labels": [
+      "Code repo (Bitbucket / GitHub)"
+    ],
+    "status": "collected",
+    "created_at": "2026-07-23T08:35:47Z",
+    "evidence": [
+      {
+        "id": "ev-2190050d",
+        "source": "repo",
+        "source_label": "Code repo (Bitbucket / GitHub)",
+        "type": "commit",
+        "title": "Last commit on branch 'main' \u2014 7d21215",
+        "detail": "Adding initial implementation. Author: Vivek Awasthi on 2026-07-22T11:46:23Z.",
+        "actor": "vivekawasthi2014-ai",
+        "url": "https://github.com/ramdixitemail/HackathonJul26/commit/7d21215e98026443d73f8c4e71c22ba7ef4e032d",
+        "timestamp": "2026-07-22T11:46:23Z",
+        "is_mock": false
+      },
+      {
+        "id": "ev-f552ef4d",
+        "source": "repo",
+        "source_label": "Code repo (Bitbucket / GitHub)",
+        "type": "code_snippet",
+        "title": "Diff \u2014 evidencegen/.env.example",
+        "detail": "@@ -0,0 +1,29 @@\n+# Copy this file to .env and fill in whichever values you have.\n+# Every value is optional \u2014 with nothing set, EvidenceGen runs fully\n+# end-to-end using realistic mock data and an offline rule-based\n+# evidence-mapping engine.\n+\n+# ---- Free / low-cost LLM providers (pick ONE) ----\n+# Groq: https://console.groq.com \u2014 generous free tier, fast Llama models\n+GROQ_API_KEY=\n+GROQ_MODEL=llama-3.1-8b-instant\n+\n+# Ollama: run a model fully locally and free (https://ollama.com)\n+# e.g. `ollama pull llama3.1 && ollama serve`\n+OLLAMA_HOST=\n+OLLAMA_MODEL=llama3.1\n+\n+# ---- Real source integrations (optional) ----\n+GITHUB_TOKEN=\n+GITHUB_REPO=your-org/your-repo\n+\n+CONFLUENCE_BASE_URL=https://your-domain.atlassian.net\n+CONFLUENCE_EMAIL=\n+CONFLUENCE_API_TOKEN=\n+\n+JIRA_BASE_URL=https://your-domain.atlassian.net\n+JIRA_EMAIL=\n+JIRA_API_TOKEN=\n+\n+# ---- App ----\n+PORT=5050",
+        "actor": "vivekawasthi2014-ai",
+        "url": "https://github.com/ramdixitemail/HackathonJul26/commit/7d21215e98026443d73f8c4e71c22ba7ef4e032d",
+        "timestamp": "2026-07-22T11:46:23Z",
+        "is_mock": false
+      }
+    ],
+    "agent_log": [
+      {
+        "source": "repo",
+        "status": "ok",
+        "detail": "2 item(s) collected (live)"
+      }
+    ],
+    "mapping_results": [
+      {
+        "requirement_id": "req-1",
+        "status": "missing",
+        "rationale": "No evidence of approvals found in the provided list.",
+        "evidence_ids": [],
+        "requirement_text": "Two independent approvals"
+      },
+      {
+        "requirement_id": "req-2",
+        "status": "missing",
+        "rationale": "No evidence of test results found in the provided list.",
+        "evidence_ids": [],
+        "requirement_text": "Tests passed"
+      },
+      {
+        "requirement_id": "req-3",
+        "status": "missing",
+        "rationale": "No evidence of deployment found in the provided list.",
+        "evidence_ids": [],
+        "requirement_text": "Segregated deploy"
+      }
+    ],
+    "mapping_engine": "llm:groq",
+    "summary": "This evidence pack is currently incomplete, as it lacks sufficient audit evidence to support the review process. Three key requirements remain unaddressed, hindering the pack's readiness for review. Further development and submission of required evidence are necessary to progress the audit.",
+    "summary_engine": "llm:groq"
+  }
+}

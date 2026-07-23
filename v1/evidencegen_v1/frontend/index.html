@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EvidenceGen — Audit Evidence Generator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">E</span>
+      <span class="brand-name">EvidenceGen</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-item" data-view="dashboard">
+        <span class="nav-icon">▦</span> Dashboard
+      </button>
+      <button class="nav-item" data-view="tasklist">
+        <span class="nav-icon">☑</span> Task List
+      </button>
+      <button class="nav-item active" data-view="newpack">
+        <span class="nav-icon">+</span> New Evidence Pack
+      </button>
+      <button class="nav-item" data-view="review">
+        <span class="nav-icon">✔</span> Review &amp; Mapping
+      </button>
+      <button class="nav-item" data-view="qa">
+        <span class="nav-icon">💬</span> Q&amp;A Chat
+      </button>
+      <button class="nav-item" data-view="intake">
+        <span class="nav-icon">P</span> Audit Intake
+      </button>
+      <button class="nav-item" data-view="settings">
+        <span class="nav-icon">⚙</span> Settings
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <header class="topbar">
+      <h1 id="topbar-title">New Evidence Pack</h1>
+    </header>
+
+    <section class="view" id="view-dashboard" hidden>
+      <div class="card">
+        <h2>Dashboard</h2>
+        <div id="dashboard-stats" class="stats-row"></div>
+        <h3>Recent evidence packs</h3>
+        <div id="dashboard-recent" class="pack-list"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-tasklist" hidden>
+      <div class="card">
+        <h2>Task List</h2>
+        <p class="muted">Every evidence pack you've generated, with its readiness status.</p>
+        <div id="tasklist-table"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-newpack">
+      <div class="card">
+        <div class="card-header-row">
+          <h2>New Evidence Pack</h2>
+          <span class="step-badge">Step 1 of 1</span>
+        </div>
+
+        <label class="field-label">Control template</label>
+        <select id="template-select" class="input"></select>
+
+        <label class="field-label">Collect by</label>
+        <div class="radio-row" id="collect-by-row">
+          <label class="radio-pill"><input type="radio" name="collect_by" value="control_id" /> Control ID</label>
+          <label class="radio-pill"><input type="radio" name="collect_by" value="change_id" checked /> Change ID</label>
+          <label class="radio-pill"><input type="radio" name="collect_by" value="date_range" /> Date range + Repo</label>
+        </div>
+
+        <div id="identifier-field">
+          <label class="field-label" id="identifier-label">Change ID</label>
+          <input class="input" id="identifier-input" type="text" placeholder="CHG-000123" value="CHG-000123" />
+        </div>
+
+        <label class="field-label">Sources to collect from</label>
+        <div class="sources-grid" id="sources-grid"></div>
+
+        <label class="field-label">Requirements to satisfy (from template)</label>
+        <div class="requirements-list" id="requirements-list"></div>
+
+        <div class="actions-row">
+          <button class="btn-primary" id="run-collection-btn">▶ Run Collection</button>
+          <button class="btn-secondary" id="cancel-btn">Cancel</button>
+        </div>
+        <p class="status-line" id="run-status-line"></p>
+      </div>
+    </section>
+
+    <section class="view" id="view-review" hidden>
+      <div class="card">
+        <h2>Review &amp; Mapping</h2>
+        <div id="review-empty" class="muted">Run a collection first, or pick a pack from the Task List.</div>
+        <div id="review-content" hidden>
+          <div class="pack-meta" id="review-meta"></div>
+          <p class="summary-box" id="review-summary"></p>
+
+          <h3>Requirement mapping</h3>
+          <div id="review-requirements"></div>
+
+          <h3>Collected evidence</h3>
+          <div id="review-evidence"></div>
+
+          <h3>Agent collection log</h3>
+          <div id="review-log"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-qa" hidden>
+      <div class="card">
+        <h2>Q&amp;A Chat</h2>
+        <p class="muted">Ask questions about your most recent evidence pack.</p>
+        <div class="chat-window" id="chat-window"></div>
+        <div class="chat-input-row">
+          <input class="input" id="chat-input" type="text" placeholder="e.g. Who approved this change?" />
+          <button class="btn-primary" id="chat-send-btn">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-intake" hidden>
+      <div class="card">
+        <div class="card-header-row">
+          <h2>Audit Intake</h2>
+        </div>
+
+        <label class="field-label">Audit intake text</label>
+        <textarea class="input textarea" id="intake-text" rows="7"
+          placeholder="Paste the auditor's request, policy excerpt, or email here — e.g. &#10;'Please confirm that all changes to the payments-service repo in Q2 went through code review with two independent approvals, passed automated tests, and were deployed by someone other than the author or reviewers. Include supporting screenshots from the change portal.'"></textarea>
+
+        <div class="actions-row">
+          <button class="btn-primary" id="detect-points-btn">Detect Audit Points</button>
+        </div>
+        <p class="status-line" id="intake-status-line"></p>
+
+        <div id="intake-results" hidden>
+          <label class="field-label">Audit points detected (AI)</label>
+          <div class="requirements-list" id="detected-points-list"></div>
+
+          <label class="field-label">Generate input for Evidence Collection</label>
+          <div class="intake-generated-box">
+            <label class="field-label small">Repo</label>
+            <input class="input" id="intake-repo-input" type="text" />
+
+            <label class="field-label small">Goals</label>
+            <textarea class="input textarea" id="intake-goals-input" rows="4"></textarea>
+
+            <label class="field-label small">Agents</label>
+            <div class="sources-grid" id="intake-agents-grid">
+              <label class="source-checkbox"><input type="checkbox" value="repo" checked /> GitHub Agent</label>
+              <label class="source-checkbox"><input type="checkbox" value="docs" checked /> Document Repo Agent</label>
+              <label class="source-checkbox"><input type="checkbox" value="screenshots" checked /> Portal Screenshot Agent</label>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button class="btn-primary" id="generate-open-btn">Generate &amp; Open Evidence Collection</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-evidencecollection" hidden>
+      <div class="card">
+        <div class="card-header-row">
+          <h2>Evidence Collection</h2>
+        </div>
+
+        <label class="field-label">Control / template</label>
+        <input class="input" id="ec-template-name" type="text" readonly />
+
+        <label class="field-label">What evidence do you need?</label>
+        <textarea class="input textarea" id="ec-evidence-needed" rows="6"></textarea>
+
+        <label class="field-label">Agents to run</label>
+        <div class="sources-grid" id="ec-agents-grid">
+          <label class="source-checkbox"><input type="checkbox" value="repo" /> GitHub Agent</label>
+          <label class="source-checkbox"><input type="checkbox" value="docs" /> Document Repo Agent</label>
+          <label class="source-checkbox"><input type="checkbox" value="screenshots" /> Portal Screenshot Agent</label>
+        </div>
+
+        <label class="field-label">Orchestrator plan</label>
+        <div class="orchestrator-plan" id="orchestrator-plan"></div>
+
+        <div class="actions-row">
+          <button class="btn-primary" id="run-evidence-collection-btn">▶ Run Evidence Collection</button>
+        </div>
+        <p class="status-line" id="ec-status-line"></p>
+      </div>
+    </section>
+
+    <section class="view" id="view-evidencepreview" hidden>
+      <div class="card">
+        <h2>Evidence Preview</h2>
+        <div class="pack-meta" id="preview-meta"></div>
+        <p class="summary-box" id="preview-summary"></p>
+
+        <h3>Requirement mapping</h3>
+        <div id="preview-requirements"></div>
+
+        <h3>Evidence &amp; screenshots</h3>
+        <div id="preview-evidence"></div>
+
+        <h3>Agent collection log</h3>
+        <div id="preview-log"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-settings" hidden>
+      <div class="card">
+        <h2>Settings</h2>
+        <p class="muted">Connect real sources and LLM providers by setting environment variables on the
+          server before starting it. Everything below reflects current server configuration
+          (read-only status; edit the <code>.env</code> file to change it).</p>
+        <div id="settings-status"></div>
+        <h3>Environment variables reference</h3>
+        <pre class="env-ref" id="env-ref"></pre>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
