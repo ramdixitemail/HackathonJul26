@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/api/client.ts","./src/screens/askauditmate.tsx","./src/screens/auditintake.tsx","./src/screens/evidencecollection.tsx","./src/screens/evidencepreview.tsx","./src/types/index.ts"],"errors":true,"version":"5.9.3"}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Control-M job definition for daily transaction load -->
+<job name="LOAD_TXN_DAILY">
+  <application>TXN_BATCH</application>
+  <description>Daily Transaction Load - CHG-000123</description>
+  <schedule>0 2 * * *</schedule>
+  <command>
+    <step name="load_transactions">
+      <script>scripts/load_txn.sh</script>
+      <timeout>3600</timeout>
+    </step>
+  </command>
+  <notification>
+    <email>txn-team@company.com</email>
+  </notification>
+  <!-- JIRA-4521: Data integration entrypoint -->
+</job>

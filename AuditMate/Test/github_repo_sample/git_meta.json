@@ -1,0 +1,39 @@
+{
+  "repository": "acme/payments-service",
+  "branches": {
+    "release/2026.1": [
+      {
+        "pr_number": 141,
+        "title": "Implement secure transaction load with dbLink",
+        "change_id": "CHG-000123",
+        "approvers": ["a_rao", "s_kaur"],
+        "merged_at": "2026-03-20",
+        "checks": ["unit", "integration"],
+        "deploy_approver": "m_singh",
+        "description": "Transaction loading via SRC_DBLINK with proper segregation"
+      },
+      {
+        "pr_number": 123,
+        "title": "Initial transaction batch framework",
+        "change_id": "CHG-000100",
+        "approvers": ["m_singh"],
+        "merged_at": "2026-02-15"
+      }
+    ],
+    "main": []
+  },
+  "jira_index": {
+    "JIRA-4521": [
+      {
+        "file": "scripts/load_txn.sh",
+        "line": 8,
+        "type": "comment"
+      },
+      {
+        "file": "db/oracle/PKG_TXN_LOAD.sql",
+        "line": 1,
+        "type": "comment"
+      }
+    ]
+  }
+}

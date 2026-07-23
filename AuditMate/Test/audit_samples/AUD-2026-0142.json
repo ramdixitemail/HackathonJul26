@@ -1,0 +1,6 @@
+{
+  "audit_id": "AUD-2026-0142",
+  "application_id": "APP-001",
+  "title": "Segregation of Duties and Change Controls",
+  "audit_text": "Segregation of duties for prod changes? Tests before release? Who approved each deployment? Data only via database link? Trace the CHG-000123 change flow. Check JIRA-4521 for code snippets. Show design documentation. Capture portal compliance screenshot."
+}
